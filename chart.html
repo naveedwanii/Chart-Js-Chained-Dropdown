@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Chart Js</title>
+        <link href='style/style.css' rel='stylesheet' />
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    </head>
+
+    <body>
+        <label>Product</label>
+        <input type='text' id='prd' name='prd' required/>
+        
+        <label>Sales</label>
+        <input type='number' id='sales' names='sales'/>
+
+        <button id='add' onclick='addData(chart)'>Add</button>
+        <button id='remove' onclick='removeData(chart)'>Remove</button>
+        <canvas id="myChart"></canvas>
+
+        <script>
+            
+          var ctx = document.getElementById('myChart').getContext('2d');
+var chart = new Chart(ctx, {
+
+    // The type of chart we want to create
+    type: 'bar',
+
+    // The data for our dataset
+    data: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        datasets: [{
+            label: 'My Sales',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            /*data: [0, 10, 5, 2, 20, 30, 45]*/
+
+        }]
+    },
+
+    // Configuration options go here
+    options: {}
+});
+
+  function addData(chart){
+    chart.data.labels.push(document.getElementById('prd').value)
+    chart.data.datasets.forEach((dataset)=>{
+        dataset.data.push(document.getElementById('sales').value * 1)
+    });
+    chart.update();
+    document.querySelectorAll('input').forEach(input =>{
+        input.value = '';
+    })
+    
+  }
+
+  function removeData(){
+   chart.data.labels.pop()
+   chart.data.datasets.forEach((dataset)=>{
+       dataset.data.pop()
+   });
+   chart.update();
+  }
+
+        </script>
+        
+
+    </body>
+</html>

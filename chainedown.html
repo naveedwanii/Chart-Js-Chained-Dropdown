@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Chained Dropdown
+        </title>
+        <link href='style.css' rel='stylesheet' />
+        
+    </head>
+
+    <body>
+        <h2>Choose your Country</h2>
+        
+        Choose Country:
+        <select id='selct1' name='selct1' onchange="populate(this.id, 'selct2')">
+            <option value='Country'>Country</option>
+            <option value='USA'>USA</option>
+            <option value='London'>London</option>
+            <option value='India'>India</option>
+            <option value='Australia'>Australia</option>
+            <option value='New Zealand'>New Zealand</option>
+        
+        </select>
+        
+        Choose State: 
+        <select id='selct2' name='selct2'>
+            <option value='States'>States</option>
+        </select>
+        
+
+        <script type='text/javascript'>
+          function populate(s1,s2){
+            var s1 = document.getElementById(s1);
+            var s2 = document.getElementById(s2);
+            s2.innerHTML = '';
+            if(s1.value == 'USA'){
+               var optionArray = ['|','Los Angeles | Los Angeles', 'Chicago | Chicago', 'Washington | Washington']
+            }
+            else if(s1.value == 'London'){
+                var optionArray = ['|', 'Manchester | Manchester', 'LiverPool | LiverPool', 'Cardiff | Cardiff' ]
+            }
+            else if(s1.value == 'India'){
+                var optionArray = ['|', 'Delhi | Delhi', 'Mumbai | Mumbai', 'Bangalore | Bangalore']
+            }
+            for(var option in optionArray){
+                var pair = optionArray[option].split('|');
+                var newOption = document.createElement('option');
+                newOption.value = pair[0];
+                newOption.innerHTML = pair[1];
+                s2.options.add(newOption);
+            }
+          }
+        
+        </script>
+    </body>
+</html>
